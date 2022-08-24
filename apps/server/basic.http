@@ -1,0 +1,7 @@
+# ---CARDS---
+### List all cards
+GET http://localhost:3080/api/
+
+# ---CARDS---
+### List all cards
+GET http://localhost:3080/api/v1/cards
