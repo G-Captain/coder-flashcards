@@ -8,6 +8,7 @@ const cardSchema = new Schema(
       type: String,
       required: true,
     },
+    problem: String,
     answer: {
       type: String,
       required: true,
