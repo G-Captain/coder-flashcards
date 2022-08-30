@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
 import Image from 'next/image';
-import ResponsiveContainer from '../components/ResponsiveContainer';
+import ResponsiveContainer from '../components/ResponsiveContainer/ResponsiveContainer';
 
 const ImageContainer = styled.div`
   display: flex;

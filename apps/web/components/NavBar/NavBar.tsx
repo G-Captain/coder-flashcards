@@ -4,16 +4,18 @@ import { IconButton, AppBar, Toolbar } from '@mui/material';
 import { MdMenu } from 'react-icons/md';
 import styled from '@emotion/styled';
 
-import { device } from '../themes/device';
-import Logo from './Logo';
+import { device } from '../../themes/device';
+import Logo from '../Logo/Logo';
 import { useRouter } from 'next/router';
-import ResponsiveContainer from './ResponsiveContainer';
+import ResponsiveContainer from '../ResponsiveContainer/ResponsiveContainer';
+import Link from 'next/link';
 
 const StyledAppBar = styled(AppBar)`
   background-color: #ffffff;
   border-top-width: 0;
   border-left-width: 0;
   border-right-width: 0;
+  color: crimson;
 `;
 
 const StyledToolbar = styled(Toolbar)`
@@ -59,6 +61,7 @@ const NavBar = () => {
         <StyledToolbar>
           <Logo onClick={logoClickHandler} />
           <Filler />
+          <Link href="/cards/create">+ New card</Link>
           <SectionDesktop></SectionDesktop>
           <SectionMobile>
             <IconButton edge="start" color="inherit" aria-label="menu">

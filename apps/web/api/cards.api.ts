@@ -21,8 +21,8 @@ export const cardsApi = createApi({
       //     cardsArr?.sort((a, b) => b.id - a.id),
     }),
 
-    addCard: builder.mutation<CardDto, CreateCardInput>({
-      query: (body) => ({ url: '/cards/dupa', method: 'POST', body }),
+    createCard: builder.mutation<CardDto, CreateCardInput>({
+      query: (body) => ({ url: '/cards', method: 'POST', body }),
       invalidatesTags: ['Cards'],
     }),
   }),
@@ -31,9 +31,9 @@ export const cardsApi = createApi({
 // Export hooks for usage in functional components
 export const {
   useGetCardsQuery,
-  useAddCardMutation,
+  useCreateCardMutation,
   util: { getRunningOperationPromises },
 } = cardsApi;
 
 // export endpoints for use in SSR
-export const { getCards, addCard } = cardsApi.endpoints;
+export const { getCards, createCard } = cardsApi.endpoints;

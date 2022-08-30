@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { device } from '../themes/device';
+import { device } from '../../themes/device';
 
 const Container = styled.div`
   display: flex;

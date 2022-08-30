@@ -1,35 +1,30 @@
 import styled from '@emotion/styled';
-import { CircularProgress, Paper, Typography } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import {
   getCards,
   getRunningOperationPromises,
   useGetCardsQuery,
 } from '../api/cards.api';
-import ResponsiveContainer from '../components/ResponsiveContainer';
+import { ResponsiveContainer } from '../components';
+import FullCard from '../components/FullCard/FullCard';
 import { wrapper } from '../store';
 
-const StyledPaper = styled(Paper)`
-  padding: 1rem;
-`;
-
-const Question = styled(Typography)`
-  margin-bottom: 1rem;
+const CardsContainer = styled.div`
+  margin-top: 1rem;
 `;
 
 export function Index() {
   const { data: cards, isLoading, isUninitialized } = useGetCardsQuery();
-  console.log('Index ~ data', cards);
 
   return (
     <ResponsiveContainer>
       {(isUninitialized || isLoading) && <CircularProgress />}
-      {!(isUninitialized || isLoading) &&
-        cards?.map((card, index) => (
-          <StyledPaper key={card._id} variant="outlined">
-            <Question variant="h5">{`${index + 1}. ${card.question}`}</Question>
-            <Typography variant="body1">{card.answer}</Typography>
-          </StyledPaper>
-        ))}
+      <CardsContainer>
+        {!(isUninitialized || isLoading) &&
+          cards?.map((card, index) => (
+            <FullCard key={card._id} index={index + 1} card={card}></FullCard>
+          ))}
+      </CardsContainer>
     </ResponsiveContainer>
   );
 }

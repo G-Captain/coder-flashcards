@@ -13,8 +13,8 @@ const cardSchema = new Schema(
       type: String,
       required: true,
     },
-    removed: Boolean,
     category: String,
+    removed: Boolean,
   },
   {
     collection: 'cards',

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
-import { device } from '../themes/device';
+import { device } from '../../themes/device';
 import { GiBrainstorm } from 'react-icons/gi';
 
 interface CustomProps {
