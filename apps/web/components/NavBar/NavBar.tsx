@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
 import { IconButton, AppBar, Toolbar } from '@mui/material';
-import { MdMenu } from 'react-icons/md';
+import { MdAdd, MdMenu } from 'react-icons/md';
 import styled from '@emotion/styled';
 
 import { device } from '../../themes/device';
 import Logo from '../Logo/Logo';
 import { useRouter } from 'next/router';
 import ResponsiveContainer from '../ResponsiveContainer/ResponsiveContainer';
-import Link from 'next/link';
+import AppButton from '../AppButton/AppButton';
 
 const StyledAppBar = styled(AppBar)`
   background-color: #ffffff;
@@ -61,7 +61,15 @@ const NavBar = () => {
         <StyledToolbar>
           <Logo onClick={logoClickHandler} />
           <Filler />
-          <Link href="/cards/create">+ New card</Link>
+          <AppButton
+            to="/cards/create"
+            size="large"
+            color="primary"
+            variant="outlined"
+            startIcon={<MdAdd />}
+          >
+            Create
+          </AppButton>
           <SectionDesktop></SectionDesktop>
           <SectionMobile>
             <IconButton edge="start" color="inherit" aria-label="menu">

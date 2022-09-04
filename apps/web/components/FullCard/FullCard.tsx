@@ -1,12 +1,12 @@
+import { useMemo } from 'react';
 import { CardDto } from '../../types/Card.dto';
 import { Paper, Typography } from '@mui/material';
 import styled from '@emotion/styled';
-import { useMemo } from 'react';
 import { decode } from 'html-entities';
 
 interface Props {
-  card: CardDto;
-  index: number;
+  card: Omit<CardDto, 'id' | '_id'>;
+  index?: number;
 }
 
 const StyledPaper = styled(Paper)`
@@ -40,6 +40,10 @@ const getHtml = (value) => {
 const FullCard = ({ card, index }: Props) => {
   const problem = useMemo(() => getHtml(card.problem), [card.problem]);
   const answer = useMemo(() => getHtml(card.answer), [card.answer]);
+  const question = useMemo(
+    () => (index ? `${index}. ${card.question}` : card.question),
+    [card.question, index]
+  );
 
   if (!card?.question || !answer) {
     return null;
@@ -47,7 +51,7 @@ const FullCard = ({ card, index }: Props) => {
 
   return (
     <StyledPaper variant="outlined">
-      <Question variant="h5">{`${index}. ${card.question}`}</Question>
+      <Question variant="h5">{question}</Question>
 
       {problem && (
         <Problem

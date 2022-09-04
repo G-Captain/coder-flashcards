@@ -3,6 +3,7 @@ import AppTextField from './AppTextField/AppTextField';
 import FormButton from './Form/components/FormButton';
 import FormTextField from './Form/components/FormTextField';
 import Form from './Form/Form';
+import FullCard from './FullCard/FullCard';
 import Logo from './Logo/Logo';
 import NavBar from './NavBar/NavBar';
 import ResponsiveContainer from './ResponsiveContainer/ResponsiveContainer';
@@ -14,6 +15,7 @@ export {
   Form,
   FormButton,
   FormTextField,
+  FullCard,
   Logo,
   NavBar,
   ResponsiveContainer,

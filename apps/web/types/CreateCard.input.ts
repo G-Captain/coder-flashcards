@@ -1,6 +1,6 @@
 export interface CreateCardInput {
   question: string;
-  problem: string;
+  problem?: string;
   answer: string;
   category: string;
 }

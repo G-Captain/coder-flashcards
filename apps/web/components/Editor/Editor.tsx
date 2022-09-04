@@ -2,8 +2,10 @@ import { useCallback, useState } from 'react';
 import ReactQuill from 'react-quill';
 import DOMPurify from 'dompurify';
 import styled from '@emotion/styled';
+import 'react-quill/dist/quill.snow.css';
 
 interface Props {
+  defaultValue?: string;
   onValueChange?: (string) => void;
 }
 
@@ -46,8 +48,8 @@ const formats = [
   'code-block',
 ];
 
-const Editor = ({ onValueChange }: Props) => {
-  const [value, setValue] = useState('');
+const Editor = ({ defaultValue, onValueChange }: Props) => {
+  const [value, setValue] = useState(defaultValue);
 
   const editorChangeHandler = useCallback(
     (content, delta, source, editor) => {

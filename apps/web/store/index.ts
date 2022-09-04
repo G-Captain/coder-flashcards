@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import cardsReduces from './cards.slice';
+import cardFormReducer from './cardForm.slice';
 import { cardsApi } from '../api/cards.api';
 import { createWrapper } from 'next-redux-wrapper';
 
@@ -8,6 +9,7 @@ const makeStore = () =>
   configureStore({
     reducer: {
       cards: cardsReduces,
+      cardForm: cardFormReducer,
       [cardsApi.reducerPath]: cardsApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
