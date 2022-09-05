@@ -121,7 +121,9 @@ const CreateCardForm = () => {
       </FieldWrapper>
       <AnswerLabel variant="h5">Answer</AnswerLabel>
       <FieldWrapper>
-        {!ISSERVER && <Editor onValueChange={setAnswerText}></Editor>}
+        {!ISSERVER && (
+          <Editor onValueChange={setAnswerText} defaultValue={answer}></Editor>
+        )}
       </FieldWrapper>
       <ButtonRow>
         <AppButton

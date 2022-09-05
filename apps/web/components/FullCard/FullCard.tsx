@@ -1,8 +1,9 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { CardDto } from '../../types/Card.dto';
 import { Paper, Typography } from '@mui/material';
 import styled from '@emotion/styled';
 import { decode } from 'html-entities';
+import useSyntaxHighlight from '../../hooks/useSyntaxHighlight';
 
 interface Props {
   card: Omit<CardDto, 'id' | '_id'>;
@@ -45,12 +46,14 @@ const FullCard = ({ card, index }: Props) => {
     [card.question, index]
   );
 
+  useSyntaxHighlight();
+
   if (!card?.question || !answer) {
     return null;
   }
 
   return (
-    <StyledPaper variant="outlined">
+    <StyledPaper variant="outlined" className="full-card">
       <Question variant="h5">{question}</Question>
 
       {problem && (

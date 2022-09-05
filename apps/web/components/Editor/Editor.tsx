@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 import ReactQuill from 'react-quill';
-import DOMPurify from 'dompurify';
 import styled from '@emotion/styled';
 import 'react-quill/dist/quill.snow.css';
 
@@ -53,9 +52,8 @@ const Editor = ({ defaultValue, onValueChange }: Props) => {
 
   const editorChangeHandler = useCallback(
     (content, delta, source, editor) => {
-      const purifiedContent: string = DOMPurify.sanitize(content);
-      setValue(purifiedContent);
-      onValueChange?.(purifiedContent);
+      setValue(content);
+      onValueChange?.(content);
     },
     [onValueChange]
   );
@@ -69,12 +67,6 @@ const Editor = ({ defaultValue, onValueChange }: Props) => {
         formats={formats}
         placeholder="Write something..."
         onChange={editorChangeHandler}
-      />
-
-      <div
-        dangerouslySetInnerHTML={{
-          __html: value,
-        }}
       />
     </Wrapper>
   );
