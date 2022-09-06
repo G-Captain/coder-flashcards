@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test-server": "cross-env NODE_ENV=test env-cmd -f ./apps/server/.env.test jest"
+    "test-server": "cross-env NODE_ENV=test env-cmd -f ./apps/server/.env.test jest --testPathPattern=./apps/server",
+    "test-web": "jest --testPathPattern=./apps/web"
   },
   "private": true,
   "dependencies": {
@@ -56,7 +57,9 @@
     "@nrwl/react": "14.5.6",
     "@nrwl/web": "14.5.6",
     "@nrwl/workspace": "14.5.6",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "13.3.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/cors": "^2.8.12",
     "@types/express": "4.17.13",
     "@types/jest": "27.4.1",
@@ -77,11 +80,12 @@
     "eslint-plugin-react": "7.30.1",
     "eslint-plugin-react-hooks": "4.6.0",
     "jest": "^29.0.1",
+    "jest-environment-jsdom": "^29.0.2",
     "nx": "14.5.6",
     "prettier": "^2.6.2",
     "react-test-renderer": "18.2.0",
     "supertest": "^6.2.4",
-    "ts-jest": "^28.0.0-next.3",
+    "ts-jest": "^28.0.8",
     "ts-node": "10.9.1",
     "typescript": "~4.7.2"
   }
