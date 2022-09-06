@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { CardDto } from '../../types/Card.dto';
 import { Paper, Typography } from '@mui/material';
 import styled from '@emotion/styled';
@@ -18,6 +18,13 @@ const StyledPaper = styled(Paper)`
 
 const Question = styled(Typography)`
   margin-bottom: 1rem;
+`;
+
+const Wrapper = styled.div``;
+
+const Header = styled(Typography)`
+  margin-bottom: 0.5rem;
+  color: grey;
 `;
 
 const Problem = styled.div`
@@ -57,11 +64,15 @@ const FullCard = ({ card, index }: Props) => {
       <Question variant="h5">{question}</Question>
 
       {problem && (
-        <Problem
-          dangerouslySetInnerHTML={{
-            __html: problem,
-          }}
-        />
+        <Wrapper>
+          <Header variant="body2">Problem</Header>
+          <Problem
+            dangerouslySetInnerHTML={{
+              __html: problem,
+            }}
+          />
+          <Header variant="body2">Answer</Header>
+        </Wrapper>
       )}
       <Answer
         dangerouslySetInnerHTML={{
