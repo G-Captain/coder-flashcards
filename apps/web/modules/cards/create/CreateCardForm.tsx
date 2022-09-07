@@ -1,6 +1,5 @@
 import * as yup from 'yup';
-import { useCallback, useState } from 'react';
-import dynamic from 'next/dynamic';
+import { useCallback, useMemo, useState } from 'react';
 import { MdSave } from 'react-icons/md';
 import { Typography } from '@mui/material';
 import styled from '@emotion/styled';
@@ -11,20 +10,25 @@ import {
   Form,
   FormButton,
   FormTextField,
+  FormAutocomplete,
+  FormEditor,
 } from '../../../components';
 import { useAppDispatch, useRootSelector } from '../../../hooks/store.hooks';
 import { cardFormActions } from '../../../store/cardForm.slice';
 import { useRouter } from 'next/router';
-
-const ISSERVER = typeof window === 'undefined';
-
-let Editor = null;
-if (!ISSERVER) {
-  Editor = dynamic(() => import('../../../components/Editor/Editor'));
-}
+import {
+  CategoryOption,
+  categoryOptions,
+  getCategoryOption,
+} from '../../../types/Category';
+import Image from 'next/image';
 
 const FieldWrapper = styled.div`
   margin-bottom: 1rem;
+`;
+
+const CategoryLabel = styled.div`
+  margin-left: 1rem;
 `;
 
 const ProblemInfo = styled(Typography)`
@@ -55,8 +59,9 @@ const ButtonRow = styled.div`
 
 const schema = yup.object().shape({
   question: yup.string().required('Field is required'),
-  // problem: yup.string().nullable(true),
-  // answer: yup.string().required('Field is required'),
+  category: yup.object().required('Field is required').nullable(true),
+  problem: yup.string().required('Field is required').nullable(true),
+  answer: yup.string().required('Field is required').nullable(true),
 });
 
 const CreateCardForm = () => {
@@ -68,14 +73,18 @@ const CreateCardForm = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const defaultCategoryOption = useMemo(
+    () => getCategoryOption(category),
+    [category]
+  );
+
   const saveCardHandler = useCallback(
-    async (data: any) => {
-      console.log('data', data);
+    async (data: { question: string; category: CategoryOption }) => {
       const cardInput: CreateCardInput = {
         question: data?.question,
         problem: problemText,
         answer: answerText,
-        category: 'REACT',
+        category: data?.category.value,
       };
 
       dispatch(
@@ -107,32 +116,53 @@ const CreateCardForm = () => {
         />
       </FieldWrapper>
       <FieldWrapper>
+        <FormAutocomplete
+          options={categoryOptions}
+          name="category"
+          label="Category"
+          size="small"
+          getOptionLabel={(option) => option.label}
+          defaultValue={defaultCategoryOption}
+          renderOption={(props, option: CategoryOption) => (
+            <li {...props}>
+              <Image
+                loading="lazy"
+                src={option.imageSrc}
+                alt={option.value}
+                width="20"
+                height="20"
+              />
+              <CategoryLabel>{option.label}</CategoryLabel>
+            </li>
+          )}
+        />
+      </FieldWrapper>
+      <FieldWrapper>
         <ProblemLabel variant="h5">Problem</ProblemLabel>
         <ProblemInfo variant="body1">
           You can expand on the question by describing the problem in the text
           editor below or leave it empty:
         </ProblemInfo>
-        {!ISSERVER && (
-          <Editor
-            onValueChange={setProblemText}
-            defaultValue={problem}
-          ></Editor>
-        )}
+        <FormEditor
+          name="problem"
+          onValueChange={setProblemText}
+          defaultValue={problem}
+        ></FormEditor>
       </FieldWrapper>
       <AnswerLabel variant="h5">Answer</AnswerLabel>
       <FieldWrapper>
-        {!ISSERVER && (
-          <Editor onValueChange={setAnswerText} defaultValue={answer}></Editor>
-        )}
+        <FormEditor
+          name="answer"
+          onValueChange={setAnswerText}
+          defaultValue={answer}
+        ></FormEditor>
       </FieldWrapper>
       <ButtonRow>
         <AppButton
           onClick={cancelHandler}
-          // to=''
           size="large"
           variant="outlined"
           color="primary"
-          // startIcon={<MdSave />}
         >
           Cancel
         </AppButton>

@@ -3,6 +3,15 @@ import Head from 'next/head';
 import { NavBar } from '../components';
 import './styles.css';
 import { wrapper } from '../store';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const customTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#8A2BE2', // blueviolet
+    },
+  },
+});
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,8 +20,10 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <title>Coder Flashcards</title>
       </Head>
       <main className="app">
-        <NavBar />
-        <Component {...pageProps} />
+        <ThemeProvider theme={customTheme}>
+          <NavBar />
+          <Component {...pageProps} />
+        </ThemeProvider>
       </main>
     </>
   );

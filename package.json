@@ -6,7 +6,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test-server": "cross-env NODE_ENV=test env-cmd -f ./apps/server/.env.test jest --testPathPattern=./apps/server",
-    "test-web": "jest --testPathPattern=./apps/web"
+    "test-web": "jest --testPathPattern=./apps/web --watchAll"
   },
   "private": true,
   "dependencies": {

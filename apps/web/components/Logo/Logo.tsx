@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
 import { device } from '../../themes/device';
 import { GiBrainstorm } from 'react-icons/gi';
+import { useTheme } from '@emotion/react';
 
 interface CustomProps {
   onClick?: () => void;
@@ -18,7 +19,7 @@ const Wrapper = styled.div<CustomProps>`
 
 const StyledTypography = styled(Typography)`
   &.MuiTypography-root {
-    color: crimson;
+    color: theme.palette.primary.main;
   }
 
   @media ${device.mobile} {
@@ -27,12 +28,14 @@ const StyledTypography = styled(Typography)`
 `;
 
 const Logo = ({ onClick }: CustomProps) => {
+  const theme = useTheme();
+
   return (
     <Wrapper onClick={onClick}>
       <StyledTypography fontSize={'24px'} variant="caption">
         coder
       </StyledTypography>
-      <GiBrainstorm color="crimson" size="3rem" />
+      <GiBrainstorm color={theme.palette.primary.main} size="3rem" />
       <StyledTypography fontSize={'24px'} variant="caption">
         FLASHCARDS
       </StyledTypography>

@@ -4,6 +4,8 @@ import { Paper, Typography } from '@mui/material';
 import styled from '@emotion/styled';
 import { decode } from 'html-entities';
 import useSyntaxHighlight from '../../hooks/useSyntaxHighlight';
+import { getCategoryOption } from '../../types/Category';
+import Image from 'next/image';
 
 interface Props {
   card: Omit<CardDto, 'id' | '_id'>;
@@ -16,6 +18,11 @@ const StyledPaper = styled(Paper)`
   margin-bottom: 0.5rem;
 `;
 
+const QuestionContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Question = styled(Typography)`
   margin-bottom: 1rem;
 `;
@@ -25,6 +32,12 @@ const Wrapper = styled.div``;
 const Header = styled(Typography)`
   margin-bottom: 0.5rem;
   color: grey;
+`;
+
+const Category = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 `;
 
 const Problem = styled.div`
@@ -53,6 +66,11 @@ const FullCard = ({ card, index }: Props) => {
     [card.question, index]
   );
 
+  const categoryOption = useMemo(
+    () => getCategoryOption(card.category),
+    [card.category]
+  );
+
   useSyntaxHighlight();
 
   if (!card?.question || !answer) {
@@ -61,7 +79,18 @@ const FullCard = ({ card, index }: Props) => {
 
   return (
     <StyledPaper variant="outlined" className="full-card">
-      <Question variant="h5">{question}</Question>
+      <QuestionContainer>
+        <Question variant="h5">{question}</Question>
+        <Category>
+          <Image
+            loading="lazy"
+            src={categoryOption?.imageSrc || ''}
+            alt={categoryOption?.value}
+            width="30"
+            height="30"
+          />
+        </Category>
+      </QuestionContainer>
 
       {problem && (
         <Wrapper>

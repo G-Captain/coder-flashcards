@@ -9,7 +9,7 @@ const initialCardFormSlice: CardFormSlice = {
   question: '',
   problem: '',
   answer: '',
-  category: 'REACT',
+  category: 'javascript',
 };
 
 const cardFormSlice = createSlice({

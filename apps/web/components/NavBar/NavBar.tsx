@@ -15,7 +15,9 @@ const StyledAppBar = styled(AppBar)`
   border-top-width: 0;
   border-left-width: 0;
   border-right-width: 0;
-  color: crimson;
+  color: ${({ theme }) => {
+    return theme.palette.primary.main;
+  }};
 `;
 
 const StyledToolbar = styled(Toolbar)`

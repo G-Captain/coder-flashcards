@@ -8,7 +8,7 @@ describe('FullCard', () => {
     _id: 1,
     question: 'What is React?',
     answer: '&lt;p&gt;React is a JavaScript library&lt;/p&gt;',
-    category: 'REACT',
+    category: 'react',
   };
 
   const cardWithProblem: CardDto = {

@@ -51,7 +51,6 @@ const CreateCardSummary = () => {
       };
       try {
         const createCardResponse = await createCard(cardInput).unwrap();
-        console.log('createCardResponse', createCardResponse);
         dispatch(cardFormActions.createSuccess());
       } catch (error) {
         console.log(error);

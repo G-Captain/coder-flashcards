@@ -10,4 +10,14 @@ describe('Editor', () => {
     );
     expect(codeBlockButton).toBeTruthy();
   });
+
+  it(`should render helper text on error`, async () => {
+    render(<Editor error={false} />);
+    const helperText = screen.queryByText('Field is required');
+    expect(helperText).not.toBeInTheDocument();
+
+    render(<Editor error={true} />);
+    const helperText2 = screen.queryByText('Field is required');
+    expect(helperText2).toBeInTheDocument();
+  });
 });
